@@ -4,18 +4,29 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-
+import axios from 'axios';
+import WeatherCard from './components/WeatherCard';
 import UserCardList from './components/UserCardList';
 import { makeUserDatas } from "./Utils";
 
 
 const userDatas = makeUserDatas(5000);
-
-
-
-
+/*
+async function callAPI(){
+  try{
+    const result = await axios.get("https://api.openweathermap.org/data/2.5/weather?lat=37.391109&lon=126.967785&appid=4d9f8f2ea479e89af136da1d280c2431&lang=kr&units=metric")
+    console.log(result)
+  } catch(err){
+    console.log(err)
+  }
+}
+  
+callAPI()
+*/
 function App() {
   const [useDarkMode, setUseDarkMode] = useState(true);
+  const [weatherData, setWeatherData] = useState(null);
+  const [apiError, setApiError] = useState(null);
 
 
   const handleChange = (event) => {
@@ -24,13 +35,23 @@ function App() {
 
 
 
-  // useEffect(() => {
-  //   console.log("component did mount")
-  // }, []);
+  useEffect(() => {
+    const callAPI  = async() => {
+      try{
+        const result = await axios.get("https://api.openweathermap.org/data/2.5/weather?lat=37.391109&lon=126.967785&appid=4d9f8f2ea479e89af136da1d280c2431&lang=kr&units=metric")
+        setWeatherData(result.data);
+      } catch(err){
+        setApiError(err);
+      }
+    }
+    callAPI();
+    console.log("component did mount")
 
-  // useEffect(() => {
-  //   console.log(`theme 병경됨 -> ${userDarkMode}`)
-  // }, [useDarkMode]);
+  }, []);
+
+  useEffect(() => {
+    console.log(`theme 병경됨 -> ${useDarkMode}`)
+  }, [useDarkMode]);
 
 
   return (
@@ -40,6 +61,14 @@ function App() {
       },
     })
     }>
+      <Box sx={{
+        height: '100%',
+        bgcolor: 'background.default',
+        color: 'text.primary',
+        p: 1,
+      }}>
+        <WeatherCard weatherData={weatherData} apiError={apiError}/>
+      </Box>
       <Box sx={{
         height: '100%',
         bgcolor: 'background.default',
