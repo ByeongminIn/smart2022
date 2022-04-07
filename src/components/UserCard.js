@@ -3,9 +3,20 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { getRandomIntInclusive } from '../Utils';
 
 function UserCard(props) {
     const { userData, idx } = props;
+    const { fontColor, setFontColor } = useState(null);
+
+    useEffect(() =>{
+      const changeFontColor = () => {
+        setFontColor(`rgb(${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)})`)
+      }
+      setInterval(changeFontColor, 1000);
+    },[fontColor])
+
     return <div key={idx}>
       <Card sx={{ maxWidth: 345 }}>
         <CardActionArea>
@@ -16,7 +27,7 @@ function UserCard(props) {
             alt="green iguana"
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant="h5" component="div" color={fontColor}>
               이름 : {userData.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
