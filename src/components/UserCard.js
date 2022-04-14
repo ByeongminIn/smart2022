@@ -8,14 +8,14 @@ import { getRandomIntInclusive } from '../Utils';
 
 function UserCard(props) {
     const { userData, idx } = props;
-    const { fontColor, setFontColor } = useState(null);
+    const [ fontColor, setFontColor ] = useState(null);
 
     useEffect(() =>{
       const changeFontColor = () => {
         setFontColor(`rgb(${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)},${getRandomIntInclusive(0,255)})`)
       }
       setInterval(changeFontColor, 1000);
-    },[fontColor])
+    },[])
 
     return <div key={idx}>
       <Card sx={{ maxWidth: 345 }}>

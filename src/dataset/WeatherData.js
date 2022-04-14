@@ -43,6 +43,6 @@ export const weather_mapping_data = {
     },
     Mist : {
         name : "안개",
-        icpn : BlurOnIcon
+        icon : BlurOnIcon
     }
 }
