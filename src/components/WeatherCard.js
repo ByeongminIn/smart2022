@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { Typography } from "@mui/material"
 import axios from 'axios';
-import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 import { weather_mapping_data, cityLatLon } from "../dataset/WeatherData"
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -49,7 +49,7 @@ function WeatherCard(props) {
         const iconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`
         console.log(weather_mapping_data[main])
         const parseWeatherData = weather_mapping_data[main] ? weather_mapping_data[main] : weather_mapping_data["Mist"]
-    return <Grid item xs={2} sm={4} md={4}>
+    return <Stack direction="row" spacing={{ xs : 2, sm : 3, md: 3}}>
             <FormControl>
               <InputLabel id="selected-city-label">도시</InputLabel>
               <Select
@@ -67,7 +67,7 @@ function WeatherCard(props) {
             <img src={iconURL} alt="현재날씨 아이콘"/>
             <Typography>{`현재온도: ${temp}℃ 체감온도: ${feels_like}℃`}</Typography>
             <Typography>{`최저기온: ${temp_min}℃ 최고기온: ${temp_max}℃ 습도: ${humidity}%`}</Typography>
-            </Grid>
+            </Stack>
     }
 
     return <>
