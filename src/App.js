@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import WeatherCard from './components/WeatherCard';
 import UserCardList from './components/UserCardList';
 import { makeUserDatas } from "./Utils";
+import TopBar from './components/TopBar';
 
 import Grid from '@mui/material/Grid';
 
@@ -50,6 +51,7 @@ function App() {
         color: 'text.primary',
         p: 1,
       }}>
+      <TopBar />
         <Container maxWidth="lg" sx={{ p: 1 }}>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 4, md: 12 }}>
             {/* {
